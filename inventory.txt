@@ -1,0 +1,4 @@
+item, in-stock, rent, replacement
+laptop, 16, 12.00, 40.00
+flat-screen, 1, 50.00, 100.00
+table, 4, 10.00, 20.00
