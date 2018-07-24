@@ -8,3 +8,9 @@ def open_inventory(filename):
 def write_file(filename, file_string):
     with open(filename, 'w') as file:
         file.write(file_string)
+
+
+def open_history(filename):
+    with open(filename) as file:
+        file.readline()
+        file.readlines()

@@ -28,3 +28,10 @@ def create_file_string(inventory):
     for key in inventory:
         file_string += f"\n{key},{inventory[key]['Name']}, {inventory[key]['In-stock']}, {inventory[key]['Rent']}, {inventory[key]['Value']}"
     return file_string
+
+
+def create_history_string(inventory, action):
+    history_string = 'item, action, in-stock'
+    for key in inventory:
+        history_string += f"\nItem: {inventory[key]['Name']},  Action: {action},  In-stock: {inventory[key]['In-stock']}"
+    return history_string

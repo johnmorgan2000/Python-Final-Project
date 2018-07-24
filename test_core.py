@@ -127,3 +127,17 @@ def test_create_file_string():
     assert create_file_string(
         inventory
     ) == 'item, name, in-stock, rent, replacement\nlaptop,Laptop, 16, 12.0, 40.0\nflat-screen,Flat-screen, 1, 50.0, 100.0\ntable,Table, 4, 10.0, 20.0'
+
+
+def test_create_history_string():
+    inventory = {
+        'laptop': {
+            'Name': 'Laptop',
+            'In-stock': 16,
+            'Rent': 12.0,
+            'Value': 40.0
+        }
+    }
+    assert create_history_string(
+        inventory, 'Rented'
+    ) == 'item, action, in-stock\nItem: Laptop,  Action: Rented,  In-stock: 16'
