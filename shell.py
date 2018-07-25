@@ -101,23 +101,23 @@ def add_more_to_cart(inventory, cart):
         elif more == 'N':
             print('OK, lets checkout')
             disk.update_inventory(inventory, 'inventory.txt')
-            return inventory, cart
         else:
             print('Not a valid input')
+        return inventory, cart
 
 
 def create_receipt(inventory, cart, revenue):
     print('\n--Your Receipt--')
     for item_name in cart:
         print(
-            f"Items: {inventory[item_name]['Name']}  Rent: ${inventory[item_name]['Rent']}  10% Replacement Fee: {core.replacement_fee(inventory,item_name)}"
+            f"Items: {inventory[item_name]['Name']}  Rent: ${round(inventory[item_name]['Rent'],2)}  10% Replacement Fee: {round(core.replacement_fee(inventory,item_name),2)}"
         )
     rent = core.renting_total(inventory, cart)
     fee = core.total_replacement_fee(inventory, cart)
-    total = rent + fee
+    total = (rent * 0.07) + fee
     core.add_revenue(revenue, total)
     disk.update_revenue(revenue, 'revenue.txt')
-    print(f'Total: ${total}')
+    print(f'Total: ${round(total,2)}')
 
 
 def main():
