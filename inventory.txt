@@ -1,4 +1,4 @@
 item, name, in-stock, rent, replacement
-laptop, Laptop , 15, 12.0, 40.0
-flat-screen, Flat-screen , 1, 50.0, 100.0
-table, Table , 4, 10.0, 20.0
+laptop, Laptop , 31, 12.0, 40.0
+flat-screen, Flat-screen , 0, 50.0, 100.0
+table, Table , 7, 10.0, 20.0

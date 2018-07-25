@@ -1,0 +1,16 @@
+Item:  Laptop ,  Action: Renting,  In-stock: 26
+Item:  Laptop ,  Action: Renting,  In-stock: 25
+Item:  Laptop ,  Action: Returned,  In-stock: 26
+Item:  Laptop ,  Action: Renting,  In-stock: 25
+Item:  Laptop ,  Action: Returned,  In-stock: 26
+Item:  Laptop ,  Action: Returned,  In-stock: 27
+Item:  Laptop ,  Action: Returned,  In-stock: 28
+Item:  Laptop ,  Action: Returned,  In-stock: 29
+Item:  Laptop ,  Action: Returned,  In-stock: 30
+Item:  Laptop ,  Action: Renting,  In-stock: 29
+Item:  Laptop ,  Action: Returned,  In-stock: 30
+Item:  Laptop ,  Action: Returned,  In-stock: 31
+Item:  Laptop ,  Action: Returned,  In-stock: 32
+Item:  Table ,  Action: Renting,  In-stock: 6
+Item:  Laptop ,  Action: Renting,  In-stock: 31
+Item:  Laptop ,  Action: Renting,  In-stock: 31

@@ -34,6 +34,23 @@ def update_history(filename, inventory, response, action):
     write_history(filename, history_string)
 
 
-def print_history(filename):
+def history_contents(filename):
     with open(filename) as file:
-        print(file)
+        contents = file.read()
+    return contents
+
+
+def open_revenue(filename):
+    with open(filename) as file:
+        file_info = file.readlines()
+    return file_info
+
+
+def write_revenue(filename, revenue_string):
+    with open(filename, 'w') as file:
+        file.write(revenue_string)
+
+
+def update_revenue(revenue, filename):
+    revenue_string = core.create_revenue_string(revenue)
+    write_revenue(filename, revenue_string)

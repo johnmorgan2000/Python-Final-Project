@@ -21,7 +21,7 @@ def user_or_employee(inventory, cart, revenue):
         if response == 'U':
             return user_action(inventory, cart, revenue)
         elif response == 'E':
-            return employee_action(inventory)
+            return employee_action(inventory, revenue)
         else:
             print('Not a valid entry.')
 
@@ -35,7 +35,7 @@ def user_action(inventory, cart, revenue):
             return returning(inventory, revenue)
 
 
-def employee_action(inventory):
+def employee_action(inventory, revenue):
     while True:
         response = input(
             "\nEnter an action.\n[1] Stock\n[2] Transaction History\n[3] Total Revenue\n[4] Quit\n>>> "
@@ -45,8 +45,8 @@ def employee_action(inventory):
             print_inventory(inventory)
         elif response == '2':
             print(disk.history_contents('history.txt'))
-        #elif response == '3':
-
+        elif response == '3':
+            print(f"Total Revenue: ${revenue['Revenue']}")
         elif response == '4':
             exit()
 
@@ -104,7 +104,6 @@ def add_more_to_cart(inventory, cart):
             return inventory, cart
         else:
             print('Not a valid input')
-        return inventory, cart
 
 
 def create_receipt(inventory, cart, revenue):

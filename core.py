@@ -67,9 +67,14 @@ def create_revenue_dictionary(file_info):
     for number in file_info:
         items = number.split(',')
         key = items[0]
-        value = int(items[1].strip())
+        value = float(items[1].strip())
         revenue_dictionary[key] = value
     return revenue_dictionary
+
+
+def create_revenue_string(revenue):
+    revenue_string = f"Revenue,{revenue['Revenue']}"
+    return revenue_string
 
 
 def add_revenue(revenue, total):
@@ -80,8 +85,3 @@ def add_revenue(revenue, total):
 def subtract_revenue(revenue, deposit):
     revenue['Revenue'] -= deposit
     return revenue
-
-
-def create_revenue_string(revenue):
-    file_string = f"{revenue}"
-    return file_string

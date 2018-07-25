@@ -270,3 +270,7 @@ def test_add_revenue():
 def test_subtract_revenue():
     revenue = {'Revenue': 57}
     assert subtract_revenue(revenue, 3) == {'Revenue': 54}
+
+def test_create_revenue_string():
+    revenue = {'Revenue': 1}
+    assert create_revenue_string(revenue) == 'Revenue,1'
