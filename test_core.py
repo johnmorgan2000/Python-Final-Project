@@ -168,3 +168,52 @@ def test_in_stock():
 
     assert in_stock(inventory, 'laptop') == True
     assert in_stock(inventory, 'flat-screen') == False
+
+
+def test_renting_total():
+    cart = ['laptop', 'table']
+    inventory = {
+        'laptop': {
+            'Name': 'Laptop',
+            'In-stock': 16,
+            'Rent': 12.0,
+            'Value': 40.0
+        },
+        'flat-screen': {
+            'Name': 'Flat-screen',
+            'In-stock': 1,
+            'Rent': 50.0,
+            'Value': 100.0
+        },
+        'table': {
+            'Name': 'Table',
+            'In-stock': 4,
+            'Rent': 10.0,
+            'Value': 20.0
+        }
+    }
+    assert renting_total(inventory, cart) == 22.0
+
+
+def test_replacement_fee():
+    inventory = {
+        'laptop': {
+            'Name': 'Laptop',
+            'In-stock': 16,
+            'Rent': 12.0,
+            'Value': 40.0
+        },
+        'flat-screen': {
+            'Name': 'Flat-screen',
+            'In-stock': 1,
+            'Rent': 50.0,
+            'Value': 100.0
+        },
+        'table': {
+            'Name': 'Table',
+            'In-stock': 4,
+            'Rent': 10.0,
+            'Value': 20.0
+        }
+    }
+    assert replacement_fee(inventory, 'laptop') == 4.0
