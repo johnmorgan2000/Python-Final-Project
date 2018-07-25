@@ -1,16 +1,12 @@
-Item:  Laptop ,  Action: Renting,  In-stock: 26
-Item:  Laptop ,  Action: Renting,  In-stock: 25
-Item:  Laptop ,  Action: Returned,  In-stock: 26
-Item:  Laptop ,  Action: Renting,  In-stock: 25
-Item:  Laptop ,  Action: Returned,  In-stock: 26
-Item:  Laptop ,  Action: Returned,  In-stock: 27
-Item:  Laptop ,  Action: Returned,  In-stock: 28
-Item:  Laptop ,  Action: Returned,  In-stock: 29
-Item:  Laptop ,  Action: Returned,  In-stock: 30
-Item:  Laptop ,  Action: Renting,  In-stock: 29
-Item:  Laptop ,  Action: Returned,  In-stock: 30
-Item:  Laptop ,  Action: Returned,  In-stock: 31
-Item:  Laptop ,  Action: Returned,  In-stock: 32
-Item:  Table ,  Action: Renting,  In-stock: 6
-Item:  Laptop ,  Action: Renting,  In-stock: 31
-Item:  Laptop ,  Action: Renting,  In-stock: 31
+
+Item:  Lenovo,  Action: Renting,  In-stock: 19
+Item:  Dell,  Action: Renting,  In-stock: 2
+Item:  Lenovo,  Action: Renting,  In-stock: 18
+Item:  Apple,  Action: Renting,  In-stock: 14
+Item:  Dell,  Action: Renting,  In-stock: 1
+Item:  Acer,  Action: Renting,  In-stock: 99
+Item:  Apple,  Action: Returned,  In-stock: 15
+Item:  Lenovo,  Action: Renting,  In-stock: 17
+Item:  Lenovo,  Action: Renting,  In-stock: 16
+Item:  Acer,  Action: Renting,  In-stock: 98
+Item:  Apple,  Action: Renting,  In-stock: 14
