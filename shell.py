@@ -38,13 +38,19 @@ def renting(inventory, cart):
         response = input(
             'What would you like to rent today?\n>>> ').lower().strip()
         if response in inventory:
-            cart.append(f"{inventory[response]['Name']}")
-            core.remove_from_stock(inventory, response)
-            return add_more_to_cart(inventory, cart)
+            if core.in_stock(inventory, response) == True:
+                cart.append(f"{inventory[response]['Name']}")
+                core.remove_from_stock(inventory, response)
+                return add_more_to_cart(inventory, cart)
+            elif core.in_stock(inventory, response) == False:
+                print('Item is currently out of stock. Sorry')
         else:
             print(
                 'Not a valid option. Please check your spelling and try again.'
             )
+
+
+#def returning(inventory):
 
 
 def add_more_to_cart(inventory, cart):
@@ -54,9 +60,10 @@ def add_more_to_cart(inventory, cart):
             renting(inventory, cart)
         elif more == 'N':
             print('OK, lets checkout')
-            return cart
+            return inventory, cart
         else:
             print('Not a valid input')
+        return inventory, cart
 
 
 def main():
@@ -64,7 +71,9 @@ def main():
     inventory_info = disk.open_inventory('inventory.txt')
     inventory = core.create_item_dictionary(inventory_info)
     greeting()
-    user_or_employee(inventory, cart)
+    inventory, cart = user_or_employee(inventory, cart)
+    file_string = core.create_file_string(inventory)
+    disk.write_file('inventory.txt', file_string)
     print(cart)
     print(inventory)
 

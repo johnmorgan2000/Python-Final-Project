@@ -23,6 +23,14 @@ def add_to_stock(inventory, item_name):
     return inventory
 
 
+def in_stock(inventory, item_name):
+    if inventory[item_name]['In-stock'] <= 0:
+        inventory[item_name]['In-stock'] == 0
+        return False
+    elif inventory[item_name]['In-stock'] > 0:
+        return True
+
+
 def create_file_string(inventory):
     file_string = 'item, name, in-stock, rent, replacement'
     for key in inventory:

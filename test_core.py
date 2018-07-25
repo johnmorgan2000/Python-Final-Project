@@ -141,3 +141,30 @@ def test_create_history_string():
     assert create_history_string(
         inventory, 'Rented'
     ) == 'item, action, in-stock\nItem: Laptop,  Action: Rented,  In-stock: 16'
+
+
+def test_in_stock():
+
+    inventory = inventory = {
+        'laptop': {
+            'Name': 'Laptop',
+            'In-stock': 16,
+            'Rent': 12.0,
+            'Value': 40.0
+        },
+        'flat-screen': {
+            'Name': 'Flat-screen',
+            'In-stock': 0,
+            'Rent': 50.0,
+            'Value': 100.0
+        },
+        'table': {
+            'Name': 'Table',
+            'In-stock': 4,
+            'Rent': 10.0,
+            'Value': 20.0
+        }
+    }
+
+    assert in_stock(inventory, 'laptop') == True
+    assert in_stock(inventory, 'flat-screen') == False
