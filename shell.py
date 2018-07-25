@@ -20,7 +20,8 @@ def user_or_employee(inventory, cart):
         response = input('[U]ser or [E]mployee? >>> ').upper().strip()
         if response == 'U':
             return user_action(inventory, cart)
-        #elif response == 'E':
+        elif response == 'E':
+            return employee_action()
         else:
             print('Not a valid entry.')
 
@@ -31,7 +32,14 @@ def user_action(inventory, cart):
         if response == '1':
             return renting(inventory, cart)
         elif response == '2':
-            return returning()
+            return returning(inventory)
+
+
+#def employee_action():
+#    print("[1] Stock\n[2] Transaction History\n [3] Total Revenue\n")
+#    while True:
+#        if response == '1':
+#            print_inventory()
 
 
 def renting(inventory, cart):
@@ -52,7 +60,24 @@ def renting(inventory, cart):
             )
 
 
-#def returning(inventory):
+def returning(inventory):
+    while True:
+        response = input(
+            'What are you returning?\nEnter in an item or type in [Q] to quit>>> '
+        ).lower().strip()
+        if response in inventory:
+            core.add_to_stock(inventory, response)
+            deposit = core.replacement_fee(inventory, response)
+            file_string = core.create_file_string(inventory)
+            disk.write_file('inventory.txt', file_string)
+            print(
+                f'\nThank you for returning this item.\nHere is your deposit back ${deposit}\n'
+            )
+        elif response == 'q':
+            print('Goodbye')
+            exit()
+        else:
+            ('This is not a returnable item here, sorry?')
 
 
 def add_more_to_cart(inventory, cart):
