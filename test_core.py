@@ -136,11 +136,23 @@ def test_create_history_string():
             'In-stock': 16,
             'Rent': 12.0,
             'Value': 40.0
+        },
+        'flat-screen': {
+            'Name': 'Flat-screen',
+            'In-stock': 1,
+            'Rent': 50.0,
+            'Value': 100.0
+        },
+        'table': {
+            'Name': 'Table',
+            'In-stock': 4,
+            'Rent': 10.0,
+            'Value': 20.0
         }
     }
     assert create_history_string(
-        inventory, 'Rented'
-    ) == 'item, action, in-stock\nItem: Laptop,  Action: Rented,  In-stock: 16'
+        inventory, 'laptop',
+        'Rented') == 'Item: Laptop,  Action: Rented,  In-stock: 16\n'
 
 
 def test_in_stock():
@@ -217,3 +229,44 @@ def test_replacement_fee():
         }
     }
     assert replacement_fee(inventory, 'laptop') == 4.0
+
+
+def test_total_replacement_fee():
+    cart = ['laptop', 'table']
+    inventory = {
+        'laptop': {
+            'Name': 'Laptop',
+            'In-stock': 16,
+            'Rent': 12.0,
+            'Value': 40.0
+        },
+        'flat-screen': {
+            'Name': 'Flat-screen',
+            'In-stock': 1,
+            'Rent': 50.0,
+            'Value': 100.0
+        },
+        'table': {
+            'Name': 'Table',
+            'In-stock': 4,
+            'Rent': 10.0,
+            'Value': 20.0
+        }
+    }
+
+    assert total_replacement_fee(inventory, cart) == 6.0
+
+
+def test_create_revenue_dictionary():
+    revenue_dictionary = create_revenue_dictionary(['Revenue,0'])
+    assert revenue_dictionary == {'Revenue': 0}
+
+
+def test_add_revenue():
+    revenue = {'Revenue': 1}
+    assert add_revenue(revenue, 56) == {'Revenue': 57}
+
+
+def test_subtract_revenue():
+    revenue = {'Revenue': 57}
+    assert subtract_revenue(revenue, 3) == {'Revenue': 54}

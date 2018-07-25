@@ -60,3 +60,28 @@ def total_replacement_fee(inventory, cart):
     for item_name in cart:
         total += replacement_fee(inventory, item_name)
     return total
+
+
+def create_revenue_dictionary(file_info):
+    revenue_dictionary = {}
+    for number in file_info:
+        items = number.split(',')
+        key = items[0]
+        value = int(items[1].strip())
+        revenue_dictionary[key] = value
+    return revenue_dictionary
+
+
+def add_revenue(revenue, total):
+    revenue['Revenue'] += total
+    return revenue
+
+
+def subtract_revenue(revenue, deposit):
+    revenue['Revenue'] -= deposit
+    return revenue
+
+
+def create_revenue_string(revenue):
+    file_string = f"{revenue}"
+    return file_string
