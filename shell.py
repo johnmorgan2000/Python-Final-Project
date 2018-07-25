@@ -15,31 +15,40 @@ def print_inventory(inventory):
     print('-x-x-x-x-x-x-x-x-x-x-x-x-x-\n')
 
 
-def user_or_employee(inventory, cart):
+def user_or_employee(inventory, cart, revenue):
     while True:
         response = input('[U]ser or [E]mployee? >>> ').upper().strip()
         if response == 'U':
-            return user_action(inventory, cart)
+            return user_action(inventory, cart, revenue)
         elif response == 'E':
-            return employee_action()
+            return employee_action(inventory)
         else:
             print('Not a valid entry.')
 
 
-def user_action(inventory, cart):
+def user_action(inventory, cart, revenue):
     while True:
         response = input('Are you [1]renting or [2]returning? >>>')
         if response == '1':
             return renting(inventory, cart)
         elif response == '2':
-            return returning(inventory)
+            return returning(inventory, revenue)
 
 
-#def employee_action():
-#    print("[1] Stock\n[2] Transaction History\n [3] Total Revenue\n")
-#    while True:
-#        if response == '1':
-#            print_inventory()
+def employee_action(inventory):
+    while True:
+        response = input(
+            "\nEnter an action.\n[1] Stock\n[2] Transaction History\n[3] Total Revenue\n[4] Quit\n>>> "
+        )
+        print()
+        if response == '1':
+            print_inventory(inventory)
+        elif response == '2':
+            print(disk.history_contents('history.txt'))
+        #elif response == '3':
+
+        elif response == '4':
+            exit()
 
 
 def renting(inventory, cart):
@@ -62,7 +71,7 @@ def renting(inventory, cart):
             )
 
 
-def returning(inventory):
+def returning(inventory, revenue):
     while True:
         response = input(
             'What are you returning?\nEnter in an item or type in [Q] to quit>>> '
@@ -75,6 +84,8 @@ def returning(inventory):
             print(
                 f'\nThank you for returning this item.\nHere is your deposit back ${deposit}\n'
             )
+            core.subtract_revenue(revenue, deposit)
+            disk.update_revenue(revenue, 'revenue.txt')
         elif response == 'q':
             print('Goodbye')
             exit()
@@ -96,7 +107,7 @@ def add_more_to_cart(inventory, cart):
         return inventory, cart
 
 
-def create_receipt(inventory, cart):
+def create_receipt(inventory, cart, revenue):
     print('\n--Your Receipt--')
     for item_name in cart:
         print(
@@ -105,16 +116,20 @@ def create_receipt(inventory, cart):
     rent = core.renting_total(inventory, cart)
     fee = core.total_replacement_fee(inventory, cart)
     total = rent + fee
+    core.add_revenue(revenue, total)
+    disk.update_revenue(revenue, 'revenue.txt')
     print(f'Total: ${total}')
 
 
 def main():
     cart = []
     inventory_info = disk.open_inventory('inventory.txt')
+    revenue_info = disk.open_revenue('revenue.txt')
     inventory = core.create_item_dictionary(inventory_info)
+    revenue = core.create_revenue_dictionary(revenue_info)
     greeting()
-    inventory, cart = user_or_employee(inventory, cart)
-    create_receipt(inventory, cart)
+    inventory, cart = user_or_employee(inventory, cart, revenue)
+    create_receipt(inventory, cart, revenue)
 
 
 if __name__ == '__main__':
