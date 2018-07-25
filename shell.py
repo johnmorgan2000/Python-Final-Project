@@ -7,10 +7,12 @@ def greeting():
 
 
 def print_inventory(inventory):
+    print('\n-x-x-x-x-INVENTORY-x-x-x-x-')
     for key in inventory:
         print(
             f"Item:{inventory[key]['Name']}\n-In-stock: {inventory[key]['In-stock']}  Renting Price: {inventory[key]['Rent']}  Value: {inventory[key]['Value']}"
         )
+    print('-x-x-x-x-x-x-x-x-x-x-x-x-x-\n')
 
 
 def user_or_employee(inventory, cart):
@@ -39,7 +41,7 @@ def renting(inventory, cart):
             'What would you like to rent today?\n>>> ').lower().strip()
         if response in inventory:
             if core.in_stock(inventory, response) == True:
-                cart.append(f"{inventory[response]['Name']}")
+                cart.append(response)
                 core.remove_from_stock(inventory, response)
                 return add_more_to_cart(inventory, cart)
             elif core.in_stock(inventory, response) == False:
@@ -66,6 +68,18 @@ def add_more_to_cart(inventory, cart):
         return inventory, cart
 
 
+def create_receipt(inventory, cart):
+    print('\n--Your Receipt--')
+    for item_name in cart:
+        print(
+            f"Items: {inventory[item_name]['Name']}  Rent: ${inventory[item_name]['Rent']}  10% Replacement Fee: {core.replacement_fee(inventory,item_name)}"
+        )
+    rent = core.renting_total(inventory, cart)
+    fee = core.total_replacement_fee(inventory, cart)
+    total = rent + fee
+    print(f'Total: {total}')
+
+
 def main():
     cart = []
     inventory_info = disk.open_inventory('inventory.txt')
@@ -74,8 +88,7 @@ def main():
     inventory, cart = user_or_employee(inventory, cart)
     file_string = core.create_file_string(inventory)
     disk.write_file('inventory.txt', file_string)
-    print(cart)
-    print(inventory)
+    create_receipt(inventory, cart)
 
 
 if __name__ == '__main__':
