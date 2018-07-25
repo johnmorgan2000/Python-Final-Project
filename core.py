@@ -38,10 +38,8 @@ def create_file_string(inventory):
     return file_string
 
 
-def create_history_string(inventory, action):
-    history_string = 'item, action, in-stock'
-    for key in inventory:
-        history_string += f"\nItem: {inventory[key]['Name']},  Action: {action},  In-stock: {inventory[key]['In-stock']}"
+def create_history_string(inventory, response, action):
+    history_string = f"Item: {inventory[response]['Name']},  Action: {action},  In-stock: {inventory[response]['In-stock']}\n"
     return history_string
 
 
@@ -55,3 +53,10 @@ def renting_total(inventory, cart):
 def replacement_fee(inventory, item_name):
     fee = inventory[item_name]['Value'] * .10
     return fee
+
+
+def total_replacement_fee(inventory, cart):
+    total = 0
+    for item_name in cart:
+        total += replacement_fee(inventory, item_name)
+    return total

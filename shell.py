@@ -51,6 +51,8 @@ def renting(inventory, cart):
             if core.in_stock(inventory, response) == True:
                 cart.append(response)
                 core.remove_from_stock(inventory, response)
+                disk.update_history('history.txt', inventory, response,
+                                    'Renting')
                 return add_more_to_cart(inventory, cart)
             elif core.in_stock(inventory, response) == False:
                 print('Item is currently out of stock. Sorry')
@@ -68,8 +70,8 @@ def returning(inventory):
         if response in inventory:
             core.add_to_stock(inventory, response)
             deposit = core.replacement_fee(inventory, response)
-            file_string = core.create_file_string(inventory)
-            disk.write_file('inventory.txt', file_string)
+            disk.update_inventory(inventory, 'inventory.txt')
+            disk.update_history('history.txt', inventory, response, 'Returned')
             print(
                 f'\nThank you for returning this item.\nHere is your deposit back ${deposit}\n'
             )
@@ -87,6 +89,7 @@ def add_more_to_cart(inventory, cart):
             renting(inventory, cart)
         elif more == 'N':
             print('OK, lets checkout')
+            disk.update_inventory(inventory, 'inventory.txt')
             return inventory, cart
         else:
             print('Not a valid input')
@@ -102,7 +105,7 @@ def create_receipt(inventory, cart):
     rent = core.renting_total(inventory, cart)
     fee = core.total_replacement_fee(inventory, cart)
     total = rent + fee
-    print(f'Total: {total}')
+    print(f'Total: ${total}')
 
 
 def main():
@@ -111,8 +114,6 @@ def main():
     inventory = core.create_item_dictionary(inventory_info)
     greeting()
     inventory, cart = user_or_employee(inventory, cart)
-    file_string = core.create_file_string(inventory)
-    disk.write_file('inventory.txt', file_string)
     create_receipt(inventory, cart)
 
 
