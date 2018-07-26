@@ -114,7 +114,7 @@ def create_receipt(inventory, cart, revenue):
         )
     rent = core.renting_total(inventory, cart)
     fee = core.total_replacement_fee(inventory, cart)
-    total = (rent * 0.07) + fee
+    total = (rent * 1.07) + fee
     core.add_revenue(revenue, total)
     disk.update_revenue(revenue, 'revenue.txt')
     print(f'Total: ${round(total,2)}')
