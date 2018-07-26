@@ -6,7 +6,7 @@ def test_create_item_dictionary():
         'laptop,Laptop, 16, 12.00, 40.00\n',
         'flat-screen,Flat-screen, 1, 50.00, 100.00\n',
         'table,Table, 4, 10.00, 20.00\n'
-    ])
+    ]) 
     assert item_dictionary == {
         'laptop': {
             'Name': 'Laptop',
@@ -270,6 +270,7 @@ def test_add_revenue():
 def test_subtract_revenue():
     revenue = {'Revenue': 57}
     assert subtract_revenue(revenue, 3) == {'Revenue': 54}
+
 
 def test_create_revenue_string():
     revenue = {'Revenue': 1}

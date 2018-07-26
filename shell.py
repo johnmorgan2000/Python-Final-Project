@@ -10,7 +10,7 @@ def print_inventory(inventory):
     print('\n-x-x-x-x-INVENTORY-x-x-x-x-')
     for key in inventory:
         print(
-            f"Item:{inventory[key]['Name']}\n-In-stock: {inventory[key]['In-stock']}  Renting Price: {inventory[key]['Rent']}  Value: {inventory[key]['Value']}"
+            f"Item:{inventory[key]['Name']}\n--In-stock: {inventory[key]['In-stock']}  Renting Price: {inventory[key]['Rent']}  Value: {inventory[key]['Value']}"
         )
     print('-x-x-x-x-x-x-x-x-x-x-x-x-x-\n')
 
@@ -28,7 +28,7 @@ def user_or_employee(inventory, cart, revenue):
 
 def user_action(inventory, cart, revenue):
     while True:
-        response = input('Are you [1]renting or [2]returning? >>>')
+        response = input('Are you [1]renting or [2]returning? >>> ')
         if response == '1':
             return renting(inventory, cart)
         elif response == '2':

@@ -1,6 +1,6 @@
 item, name, in-stock, rent, replacement
 lenovo, Lenovo, 27, 20.0, 50.0
-apple, Apple, 11, 50.0, 200.0
+apple, Apple, 10, 50.0, 200.0
 hp, Hp, 0, 12.0, 100.0
 dell, Dell, 1, 13.5, 75.5
-acer, Acer, 92, 10.0, 30.0
+acer, Acer, 91, 10.0, 30.0
