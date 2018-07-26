@@ -102,7 +102,7 @@ def add_more_to_cart(inventory, cart):
     while True:
         more = input('Would you like anything else, [Y] or [N]?\n>>> ').upper()
         if more == 'Y':
-            renting(inventory, cart)
+            return renting(inventory, cart)
         elif more == 'N':
             print('OK, lets checkout')
             disk.update_inventory(inventory, 'inventory.txt')
@@ -123,7 +123,7 @@ def create_receipt(inventory, cart, revenue):
     taxed_total = (rent * 1.07) + fee
     core.add_revenue(revenue, total)
     disk.update_revenue(revenue, 'revenue.txt')
-    print(f'Total without Taxes:{round(taxed_total,2)}')
+    print(f'Total without Taxes: {round(taxed_total,2)}')
     print(f'Total: ${round(taxed_total,2)}')
 
 
