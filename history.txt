@@ -12,3 +12,10 @@ Item:  Apple,  Action: Renting,  In-stock: 11
 Item:  Acer,  Action: Renting,  In-stock: 91
 Item:  Lenovo,  Action: Renting,  In-stock: 27
 Item:  Apple,  Action: Renting,  In-stock: 10
+Item:  Apple,  Action: Renting,  In-stock: 9
+Item:  Apple,  Action: Renting,  In-stock: 8
+Item:  Acer,  Action: Renting,  In-stock: 90
+Item:  Acer,  Action: Renting,  In-stock: 89
+Item:  Apple,  Action: Renting,  In-stock: 7
+Item:  Apple,  Action: Renting,  In-stock: 6
+Item:  Lenovo,  Action: Renting,  In-stock: 26

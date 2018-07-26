@@ -10,8 +10,9 @@ def print_inventory(inventory):
     print('\n-x-x-x-x-INVENTORY-x-x-x-x-')
     for key in inventory:
         print(
-            f"Item:{inventory[key]['Name']}\n--In-stock: {inventory[key]['In-stock']}  Renting Price: {inventory[key]['Rent']}  Value: {inventory[key]['Value']}"
-        )
+            "Item:{}\n--In-stock: {}  Renting Price: {:0.2f}  Value: {:0.2f}".
+            format(inventory[key]['Name'], inventory[key]['In-stock'],
+                   inventory[key]['Rent'], inventory[key]['Value']))
     print('-x-x-x-x-x-x-x-x-x-x-x-x-x-\n')
 
 
@@ -114,17 +115,21 @@ def add_more_to_cart(inventory, cart):
 def create_receipt(inventory, cart, revenue):
     print('\n--Your Receipt--\nItems:')
     for item_name in cart:
-        print(
-            f"{inventory[item_name]['Name']}  Rent: ${round(inventory[item_name]['Rent'],2)}  10% Replacement Fee: {round(core.replacement_fee(inventory,item_name),2)}"
-        )
+        print("{}  Rent: ${:0.2f}  10% Replacement Fee: {:0.2f}".format(
+            inventory[item_name]['Name'], round(inventory[item_name]['Rent'],
+                                                2),
+            round(core.replacement_fee(inventory, item_name), 2)))
+    total = receipt_total(inventory, cart, revenue)
+    disk.update_revenue(revenue, 'revenue.txt')
+    print('Total: ${:0.2f}'.format(round(total, 2)))
+
+
+def receipt_total(inventory, cart, revenue):
     rent = core.renting_total(inventory, cart)
     fee = core.total_replacement_fee(inventory, cart)
-    total = rent + fee
-    taxed_total = (rent * 1.07) + fee
+    total = (rent * 1.07) + fee
     core.add_revenue(revenue, total)
-    disk.update_revenue(revenue, 'revenue.txt')
-    print(f'Total without Taxes: {round(taxed_total,2)}')
-    print(f'Total: ${round(taxed_total,2)}')
+    return total
 
 
 def main():
