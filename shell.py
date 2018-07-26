@@ -49,6 +49,8 @@ def employee_action(inventory, revenue):
             print(f"Total Revenue: ${revenue['Revenue']}")
         elif response == '4':
             exit()
+        else:
+            print('Invalid Number')
 
 
 def renting(inventory, cart):
@@ -62,6 +64,9 @@ def renting(inventory, cart):
                 core.remove_from_stock(inventory, response)
                 disk.update_history('history.txt', inventory, response,
                                     'Renting')
+                print(
+                    f"Your item will cost you {inventory[response]['Rent']} to rent for the week."
+                )
                 return add_more_to_cart(inventory, cart)
             elif core.in_stock(inventory, response) == False:
                 print('Item is currently out of stock. Sorry')
@@ -101,23 +106,25 @@ def add_more_to_cart(inventory, cart):
         elif more == 'N':
             print('OK, lets checkout')
             disk.update_inventory(inventory, 'inventory.txt')
+            return inventory, cart
         else:
             print('Not a valid input')
-        return inventory, cart
 
 
 def create_receipt(inventory, cart, revenue):
-    print('\n--Your Receipt--')
+    print('\n--Your Receipt--\nItems:')
     for item_name in cart:
         print(
-            f"Items: {inventory[item_name]['Name']}  Rent: ${round(inventory[item_name]['Rent'],2)}  10% Replacement Fee: {round(core.replacement_fee(inventory,item_name),2)}"
+            f"{inventory[item_name]['Name']}  Rent: ${round(inventory[item_name]['Rent'],2)}  10% Replacement Fee: {round(core.replacement_fee(inventory,item_name),2)}"
         )
     rent = core.renting_total(inventory, cart)
     fee = core.total_replacement_fee(inventory, cart)
-    total = (rent * 1.07) + fee
+    total = rent + fee
+    taxed_total = (rent * 1.07) + fee
     core.add_revenue(revenue, total)
     disk.update_revenue(revenue, 'revenue.txt')
-    print(f'Total: ${round(total,2)}')
+    print(f'Total without Taxes:{round(taxed_total,2)}')
+    print(f'Total: ${round(taxed_total,2)}')
 
 
 def main():
