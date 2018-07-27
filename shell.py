@@ -4,16 +4,32 @@ import core
 
 def greeting():
     print('Welcome to Base Camp\'s Rentals')
+    while True:
+        response = input("[1] Continue\n[2] Close\n>>> ").strip()
+        print()
+        if response == '1':
+            return None
+        elif response == '2':
+            print('Ok, see you later.')
+            exit()
+        else:
+            print('Please use 1 or 2 to answer')
 
 
 def print_inventory(inventory):
     print('\n-x-x-x-x-INVENTORY-x-x-x-x-')
     for key in inventory:
         print(
-            "Item:{}\n--In-stock: {}  Renting Price: {:0.2f}  Value: {:0.2f}".
-            format(inventory[key]['Name'], inventory[key]['In-stock'],
+            "{} (ID:{})\n--In-stock: {}  Renting Price: {:0.2f}  Value: {:0.2f}".
+            format(inventory[key]['Name'], key, inventory[key]['In-stock'],
                    inventory[key]['Rent'], inventory[key]['Value']))
     print('-x-x-x-x-x-x-x-x-x-x-x-x-x-\n')
+
+
+def print_stock(inventory):
+    for key in inventory:
+        print("Item: {} - ID Number: {} - In_stock: {}".format(
+            inventory[key]['Name'], key, inventory[key]['In-stock']))
 
 
 def user_or_employee(inventory, cart, revenue):
@@ -43,11 +59,11 @@ def employee_action(inventory, revenue):
         )
         print()
         if response == '1':
-            print_inventory(inventory)
+            print_stock(inventory)
         elif response == '2':
             print(disk.history_contents('history.txt'))
         elif response == '3':
-            print(f"Total Revenue: ${revenue['Revenue']}")
+            print("Total Revenue: ${:.2f}".format(revenue['Revenue']))
         elif response == '4':
             exit()
         else:
@@ -58,7 +74,8 @@ def renting(inventory, cart):
     print_inventory(inventory)
     while True:
         response = input(
-            'What would you like to rent today?\n>>> ').lower().strip()
+            'What would you like to rent today? Use a valid ID number.\n>>> '
+        ).lower().strip()
         if response in inventory:
             if core.in_stock(inventory, response) == True:
                 cart.append(response)
@@ -66,7 +83,7 @@ def renting(inventory, cart):
                 disk.update_history('history.txt', inventory, response,
                                     'Renting')
                 print(
-                    f"Your item will cost you {inventory[response]['Rent']} to rent for the week."
+                    f"Your item ({inventory[response]['Name']}) will cost you {inventory[response]['Rent']} to rent for the week."
                 )
                 return add_more_to_cart(inventory, cart)
             elif core.in_stock(inventory, response) == False:
@@ -122,6 +139,7 @@ def create_receipt(inventory, cart, revenue):
     total = receipt_total(inventory, cart, revenue)
     disk.update_revenue(revenue, 'revenue.txt')
     print('Total: ${:0.2f}'.format(round(total, 2)))
+    print('Thank you, goodbye\n')
 
 
 def receipt_total(inventory, cart, revenue):
@@ -138,9 +156,12 @@ def main():
     revenue_info = disk.open_revenue('revenue.txt')
     inventory = core.create_item_dictionary(inventory_info)
     revenue = core.create_revenue_dictionary(revenue_info)
+
     greeting()
     inventory, cart = user_or_employee(inventory, cart, revenue)
     create_receipt(inventory, cart, revenue)
+
+    main()
 
 
 if __name__ == '__main__':

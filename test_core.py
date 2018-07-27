@@ -105,19 +105,19 @@ def test_add_to_stock():
 
 def test_create_file_string():
     inventory = {
-        'laptop': {
+        'a1': {
             'Name': 'Laptop',
             'In-stock': 16,
             'Rent': 12.0,
             'Value': 40.0
         },
-        'flat-screen': {
+        'a2': {
             'Name': 'Flat-screen',
             'In-stock': 1,
             'Rent': 50.0,
             'Value': 100.0
         },
-        'table': {
+        'a3': {
             'Name': 'Table',
             'In-stock': 4,
             'Rent': 10.0,
@@ -126,7 +126,7 @@ def test_create_file_string():
     }
     assert create_file_string(
         inventory
-    ) == 'item, name, in-stock, rent, replacement\nlaptop,Laptop, 16, 12.0, 40.0\nflat-screen,Flat-screen, 1, 50.0, 100.0\ntable,Table, 4, 10.0, 20.0'
+    ) == 'id_num, name, in-stock, rent, replacement\na1,Laptop, 16, 12.0, 40.0\na2,Flat-screen, 1, 50.0, 100.0\na3,Table, 4, 10.0, 20.0'
 
 
 def test_create_history_string():

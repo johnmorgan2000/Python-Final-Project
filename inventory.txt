@@ -1,6 +1,6 @@
-item, name, in-stock, rent, replacement
-lenovo, Lenovo, 26, 20.0, 50.0
-apple, Apple, 6, 50.0, 200.0
-hp, Hp, 0, 12.0, 100.0
-dell, Dell, 1, 13.5, 75.5
-acer, Acer, 89, 10.0, 30.0
+id_num, name, in-stock, rent, replacement
+a1, Lenovo, 24, 20.0, 50.0
+a2, Apple, 40, 50.0, 200.0
+a3, Hp, 0, 12.0, 100.0
+a4, Dell, 80, 13.5, 75.5
+a5, Acer, 88, 10.0, 30.0

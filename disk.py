@@ -15,7 +15,6 @@ def write_file(filename, file_string):
 
 def open_history(filename):
     with open(filename) as file:
-        file.readline()
         file.readlines()
 
 
