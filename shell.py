@@ -3,6 +3,7 @@ import core
 
 
 def greeting():
+    print()
     print('Welcome to Base Camp\'s Rentals')
     while True:
         response = input("[1] Continue\n[2] Close\n>>> ").strip()
@@ -30,6 +31,11 @@ def print_stock(inventory):
     for key in inventory:
         print("Item: {} - ID Number: {} - In_stock: {}".format(
             inventory[key]['Name'], key, inventory[key]['In-stock']))
+
+
+def print_return_item_list(inventory):
+    for key in inventory:
+        print("ID: {}  Item: {}".format(key, inventory[key]['Name']))
 
 
 def user_or_employee(inventory, cart, revenue):
@@ -65,7 +71,7 @@ def employee_action(inventory, revenue):
         elif response == '3':
             print("Total Revenue: ${:.2f}".format(revenue['Revenue']))
         elif response == '4':
-            exit()
+            main()
         else:
             print('Invalid Number')
 
@@ -96,8 +102,9 @@ def renting(inventory, cart):
 
 def returning(inventory, revenue):
     while True:
+        print_return_item_list(inventory)
         response = input(
-            'What are you returning?\nEnter in an item or type in [Q] to quit>>> '
+            'What are you returning?\nEnter in an ID number or type in [Q] to quit>>> '
         ).lower().strip()
         if response in inventory:
             core.add_to_stock(inventory, response)
@@ -111,7 +118,7 @@ def returning(inventory, revenue):
             disk.update_revenue(revenue, 'revenue.txt')
         elif response == 'q':
             print('Goodbye')
-            exit()
+            main()
         else:
             ('This is not a returnable item here, sorry?')
 

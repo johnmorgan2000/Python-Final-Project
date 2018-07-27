@@ -73,7 +73,7 @@ def create_revenue_dictionary(file_info):
 
 
 def create_revenue_string(revenue):
-    revenue_string = f"Revenue,{round(revenue['Revenue'],2)}"
+    revenue_string = "Revenue,{:.2f}".format(round(revenue['Revenue'], 2))
     return revenue_string
 
 
