@@ -14,8 +14,12 @@ def create_item_dictionary(item_list):
 
 
 def remove_from_stock(inventory, item_name):
-    inventory[item_name]['In-stock'] -= 1
-    return inventory
+    if inventory[item_name]['In-stock'] > 0:
+        inventory[item_name]['In-stock'] -= 1
+        return inventory
+    else:
+        inventory[item_name]['In-stock'] == 0
+        return inventory
 
 
 def add_to_stock(inventory, item_name):
