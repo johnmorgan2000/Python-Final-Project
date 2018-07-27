@@ -29,7 +29,7 @@ def print_inventory(inventory):
 
 def print_stock(inventory):
     for key in inventory:
-        print("Item: {} - ID Number: {} - In_stock: {}".format(
+        print("Item: {} || ID Number: {} || In stock: {}".format(
             inventory[key]['Name'], key, inventory[key]['In-stock']))
 
 
