@@ -81,9 +81,11 @@ def renting(date, inventory, cart):
     print_inventory(inventory)
     while True:
         response = input(
-            'What would you like to rent today? Use a valid ID number.\n>>> '
+            'What would you like to rent today? Use a valid ID number or [C]ancel.\n>>> '
         ).lower().strip()
-        if response in inventory:
+        if response == 'c':
+            main()
+        elif response in inventory:
             if core.in_stock(inventory, response) == True:
                 cart.append(response)
                 core.remove_from_stock(inventory, response)
