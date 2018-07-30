@@ -28,8 +28,9 @@ def update_inventory(inventory, filename):
     write_file(filename, file_string)
 
 
-def update_history(filename, inventory, response, action):
-    history_string = core.create_history_string(inventory, response, action)
+def update_history(date, filename, inventory, response, action):
+    history_string = core.create_history_string(date, inventory, response,
+                                                action)
     write_history(filename, history_string)
 
 

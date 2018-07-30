@@ -1,5 +1,7 @@
 import datetime
 
+date = datetime.datetime.now()
+
 
 def create_item_dictionary(item_list):
     item_dictionary = {}
@@ -45,8 +47,8 @@ def create_file_string(inventory):
     return file_string
 
 
-def create_history_string(inventory, response, action):
-    history_string = f"{datetime.datetime.now()}: {inventory[response]['Name']}, {action},  In-stock: {inventory[response]['In-stock']}\n"
+def create_history_string(date, inventory, response, action):
+    history_string = f"{date}: {inventory[response]['Name']}, {action},  In-stock: {inventory[response]['In-stock']}\n"
     return history_string
 
 
