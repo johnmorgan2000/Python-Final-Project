@@ -1,4 +1,1 @@
 
-2018-07-30 08:54:52.103346:  Apple, Renting,  In-stock: 39
-2018-07-30 08:55:36.947613:  Lenovo, Renting,  In-stock: 29
-2018-07-30 08:55:48.289614:  Apple, Returned,  In-stock: 40
