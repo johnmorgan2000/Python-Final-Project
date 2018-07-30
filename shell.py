@@ -30,8 +30,8 @@ def print_inventory(inventory):
 
 def print_stock(inventory):
     for key in inventory:
-        print("Item: {} || ID Number: {} || In stock: {}".format(
-            inventory[key]['Name'], key, inventory[key]['In-stock']))
+        print("{} ({}) -- In stock: {}".format(inventory[key]['Name'], key,
+                                               inventory[key]['In-stock']))
 
 
 def print_return_item_list(inventory):
@@ -88,11 +88,12 @@ def renting(date, inventory, cart):
                 cart.append(response)
                 core.remove_from_stock(inventory, response)
                 disk.update_history(date, 'history.txt', inventory, response,
-                                    'Renting')
+                                    'Rented')
                 print(
-                    f"Your item ({inventory[response]['Name']}) will cost you {inventory[response]['Rent']} to rent for the week."
-                )
-                return add_more_to_cart(inventory, cart)
+                    "Your item ({}) will cost you {:0.2f} to rent for the week.".
+                    format(inventory[response]['Name'],
+                           inventory[response]['Rent']))
+                return add_more_to_cart(date, inventory, cart)
             elif core.in_stock(inventory, response) == False:
                 print('Item is currently out of stock. Sorry')
         else:
@@ -125,11 +126,12 @@ def returning(date, inventory, revenue):
             ('This is not a returnable item here, sorry?')
 
 
-def add_more_to_cart(inventory, cart):
+def add_more_to_cart(date, inventory, cart):
     while True:
-        more = input('Would you like anything else, [Y] or [N]?\n>>> ').upper()
+        more = input(
+            'Would you like anything else, [Y] or [N]?\n>>> ').upper().strip()
         if more == 'Y':
-            return renting(inventory, cart)
+            return renting(date, inventory, cart)
         elif more == 'N':
             print('OK, lets checkout')
             disk.update_inventory(inventory, 'inventory.txt')
