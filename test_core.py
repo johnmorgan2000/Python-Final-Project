@@ -6,7 +6,7 @@ def test_create_item_dictionary():
         'laptop,Laptop, 16, 12.00, 40.00\n',
         'flat-screen,Flat-screen, 1, 50.00, 100.00\n',
         'table,Table, 4, 10.00, 20.00\n'
-    ]) 
+    ])
     assert item_dictionary == {
         'laptop': {
             'Name': 'Laptop',
@@ -37,7 +37,7 @@ def test_remove_from_stock():
             'Value': 40.0
         },
         'flat-screen': {
-            'In-stock': 1,
+            'In-stock': 0,
             'Rent': 50.0,
             'Value': 100.0
         },
@@ -54,7 +54,24 @@ def test_remove_from_stock():
             'Value': 40.0
         },
         'flat-screen': {
-            'In-stock': 1,
+            'In-stock': 0,
+            'Rent': 50.0,
+            'Value': 100.0
+        },
+        'table': {
+            'In-stock': 4,
+            'Rent': 10.0,
+            'Value': 20.0
+        }
+    }
+    assert remove_from_stock(inventory, 'flat-screen') == {
+        'laptop': {
+            'In-stock': 15,
+            'Rent': 12.0,
+            'Value': 40.0
+        },
+        'flat-screen': {
+            'In-stock': 0,
             'Rent': 50.0,
             'Value': 100.0
         },
@@ -150,9 +167,9 @@ def test_create_history_string():
             'Value': 20.0
         }
     }
-    assert create_history_string(
+    assert create_history_string(date,
         inventory, 'laptop',
-        'Rented') == 'Item: Laptop,  Action: Rented,  In-stock: 16\n'
+        'Rented') == f'{date}: Laptop, Rented,  In-stock: 16\n'
 
 
 def test_in_stock():
@@ -274,4 +291,4 @@ def test_subtract_revenue():
 
 def test_create_revenue_string():
     revenue = {'Revenue': 1}
-    assert create_revenue_string(revenue) == 'Revenue,1'
+    assert create_revenue_string(revenue) == 'Revenue,1.00'
