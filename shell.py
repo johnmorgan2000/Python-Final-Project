@@ -1,5 +1,6 @@
 import disk
 import core
+import datetime
 
 
 def greeting():
@@ -38,24 +39,24 @@ def print_return_item_list(inventory):
         print("ID: {}  Item: {}".format(key, inventory[key]['Name']))
 
 
-def user_or_employee(inventory, cart, revenue):
+def user_or_employee(date, inventory, cart, revenue):
     while True:
         response = input('[U]ser or [E]mployee? >>> ').upper().strip()
         if response == 'U':
-            return user_action(inventory, cart, revenue)
+            return user_action(date, inventory, cart, revenue)
         elif response == 'E':
             return employee_action(inventory, revenue)
         else:
             print('Not a valid entry.')
 
 
-def user_action(inventory, cart, revenue):
+def user_action(date, inventory, cart, revenue):
     while True:
         response = input('Are you [1]renting or [2]returning? >>> ')
         if response == '1':
-            return renting(inventory, cart)
+            return renting(date, inventory, cart)
         elif response == '2':
-            return returning(inventory, revenue)
+            return returning(date, inventory, revenue)
 
 
 def employee_action(inventory, revenue):
@@ -76,7 +77,7 @@ def employee_action(inventory, revenue):
             print('Invalid Number')
 
 
-def renting(inventory, cart):
+def renting(date, inventory, cart):
     print_inventory(inventory)
     while True:
         response = input(
@@ -86,7 +87,7 @@ def renting(inventory, cart):
             if core.in_stock(inventory, response) == True:
                 cart.append(response)
                 core.remove_from_stock(inventory, response)
-                disk.update_history('history.txt', inventory, response,
+                disk.update_history(date, 'history.txt', inventory, response,
                                     'Renting')
                 print(
                     f"Your item ({inventory[response]['Name']}) will cost you {inventory[response]['Rent']} to rent for the week."
@@ -100,7 +101,7 @@ def renting(inventory, cart):
             )
 
 
-def returning(inventory, revenue):
+def returning(date, inventory, revenue):
     while True:
         print_return_item_list(inventory)
         response = input(
@@ -110,7 +111,8 @@ def returning(inventory, revenue):
             core.add_to_stock(inventory, response)
             deposit = core.replacement_fee(inventory, response)
             disk.update_inventory(inventory, 'inventory.txt')
-            disk.update_history('history.txt', inventory, response, 'Returned')
+            disk.update_history(date, 'history.txt', inventory, response,
+                                'Returned')
             print(
                 f'\nThank you for returning this item.\nHere is your deposit back ${deposit}\n'
             )
@@ -158,6 +160,7 @@ def receipt_total(inventory, cart, revenue):
 
 
 def main():
+    date = datetime.datetime.now()
     cart = []
     inventory_info = disk.open_inventory('inventory.txt')
     revenue_info = disk.open_revenue('revenue.txt')
@@ -165,7 +168,7 @@ def main():
     revenue = core.create_revenue_dictionary(revenue_info)
 
     greeting()
-    inventory, cart = user_or_employee(inventory, cart, revenue)
+    inventory, cart = user_or_employee(date, inventory, cart, revenue)
     create_receipt(inventory, cart, revenue)
 
     main()
